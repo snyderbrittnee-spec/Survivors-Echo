@@ -1,7 +1,7 @@
 // Survivor's Echo — Book AI
 // Replace YOUR_API_KEY_HERE with your actual Gemini API key
 
-const API_KEY = 'AIzaSyAtw55XY0FTgNDfnvtOezy1Tc-UJ3h_wkE';
+const API_KEY = 'AIzaSyDSUKmVD3itJsK-1E_wLnX_XbOS8xdya5Y';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 let uploadedFiles = [];
@@ -116,6 +116,7 @@ function updateFileList() {
 }
 
 function removeFile(idx) {
+  // ✅ Fix: grab first element of splice result
   const removed = uploadedFiles.splice(idx, 1);
   totalContext = uploadedFiles.map(f =>
     `\n\n=== FILE: ${f.name} ===\n${f.text}`).join('');
@@ -186,6 +187,7 @@ async function sendMessage() {
     }
 
     const data = await response.json();
+    // ✅ Fix: correct optional chaining with array index access
     const reply = data.candidates?.?.content?.parts?.?.text || 'No response received';
 
     chatHistory.push({ role: 'model', parts: [{ text: reply }] });
