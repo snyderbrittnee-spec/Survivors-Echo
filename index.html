@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survivor's Echo — Book AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="sidebar">
+    <div id="logo">
+      <h1>SURVIVOR'S<br>ECHO</h1>
+      <p>Book AI Assistant</p>
+    </div>
+    <div id="file-section">
+      <h3>📁 Your Files</h3>
+      <div id="file-list"></div>
+      <label id="upload-btn">
+        + Upload File
+        <input type="file" id="file-input" multiple 
+               accept=".txt,.pdf,.md,.doc,.docx" hidden>
+      </label>
+    </div>
+    <div id="loaded-context">
+      <h3>🧠 Loaded Into AI</h3>
+      <div id="context-list"></div>
+    </div>
+    <div id="sidebar-bottom">
+      <button id="clear-btn">🗑 Clear Chat</button>
+      <p id="token-count">Context: 0 tokens</p>
+    </div>
+  </div>
+  <div id="main">
+    <div id="chat-header">
+      <h2>Chat with your Book AI</h2>
+      <p id="status">Upload your files on the left to get started</p>
+    </div>
+    <div id="chat-box"></div>
+    <div id="input-area">
+      <textarea id="user-input" 
+                placeholder="Ask anything about your book..." 
+                rows="3"></textarea>
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
