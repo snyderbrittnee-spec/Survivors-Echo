@@ -1,7 +1,7 @@
 // Survivor's Echo — Book AI
 // Replace YOUR_API_KEY_HERE with your actual Gemini API key
 
-const API_KEY = "AIzaSyAtw55XY0FTgNDfnvtOezy1Tc-UJ3h_wkE";
+const API_KEY = 'AIzaSyAtw55XY0FTgNDfnvtOezy1Tc-UJ3h_wkE';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 let uploadedFiles = [];
