@@ -21,7 +21,7 @@ const clearBtn = document.getElementById('clear-btn');
 
 // Add welcome message
 window.onload = () => {
-  addMessage('ai', `Welcome back. I'm your Survivor's Echo AI assistant.\n\nUpload your book files on the left and I'll read everything before we start. Once your files are loaded, I'll know your characters, world, rules, and story inside out.\n\nWhat are we working on today?`);
+  addMessage('ai', `Welcome back. I'm your Survivor's Echo AI assistant.\n\nUpload your book files on the left and I'll read everything before we start. Once your files are loaded, I'll know your story inside and out.`);
 };
 
 // File upload handler
@@ -122,7 +122,7 @@ function removeFile(idx) {
     `\n\n=== FILE: ${f.name} ===\n${f.text}`).join('');
   updateFileList();
   updateContextDisplay();
-  addMessage('system', `🗑 ${removed.name} removed from AI memory`);
+  addMessage('system', `🗑 ${removed[0].name} removed from AI memory`);
   if (uploadedFiles.length === 0) {
     statusEl.textContent = 'Upload your files on the left to get started';
   }
@@ -162,8 +162,8 @@ async function sendMessage() {
   addMessage('user', text);
 
   const systemPrompt = totalContext.length > 0
-    ? `You are a creative writing AI assistant for the author of "Survivor's Echo" — a zombie apocalypse book series. You have been given the author's complete book files as context. Read them carefully and use them as your source of truth for everything about this project.\n\nHere are all the author's files:\n${totalContext}\n\nAlways stay consistent with what is in these files. If something isn't in the files, say so honestly rather than making things up. Be creative, helpful, and supportive of the author's vision.`
-    : `You are a creative writing AI assistant helping the author of "Survivor's Echo" — a zombie apocalypse book series. No files have been uploaded yet. Encourage the author to upload their book files so you can learn everything about their project.`;
+    ? `You are a creative writing AI assistant for the author of "Survivor's Echo" — a zombie apocalypse book series. You have been given the author's complete book files as context. Read them carefully and provide thoughtful, detailed feedback and ideas based on the actual content.`
+    : `You are a creative writing AI assistant helping the author of "Survivor's Echo" — a zombie apocalypse book series. No files have been uploaded yet. Encourage the author to upload their book files so you can give specific feedback.`;
 
   chatHistory.push({ role: 'user', parts: [{ text }] });
 
@@ -188,7 +188,7 @@ async function sendMessage() {
 
     const data = await response.json();
     // ✅ Fix: correct optional chaining with array index access
-    const reply = data.candidates?.?.content?.parts?.?.text || 'No response received';
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received';
 
     chatHistory.push({ role: 'model', parts: [{ text: reply }] });
     addMessage('ai', reply);
